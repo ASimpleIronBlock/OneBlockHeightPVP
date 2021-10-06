@@ -1,9 +1,9 @@
 package me.ironblock.oneblockpvp.oneblockpvpplugin.utils
 
-import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.OverWorldMapGenerator
-import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.NetherMapGenerator
-import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.TheEndMapGenerator
 import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.MapGenerator
+import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.NetherMapGenerator
+import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.OverWorldMapGenerator
+import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.TheEndMapGenerator
 import org.bukkit.Location
 import org.bukkit.World
 import java.util.*
