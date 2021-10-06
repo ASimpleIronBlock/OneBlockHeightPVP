@@ -1,0 +1,15 @@
+name: OneBlockPvPPlugin
+version: '${project.version}'
+main: me.ironblock.oneblockpvp.oneblockpvpplugin.OneBlockPvPPlugin
+api-version: 1.16
+authors: [ Iron__Block ]
+description: BV1Fg411L7ji
+load: STARTUP
+
+commands:
+  gameStart:
+    description: "开始游戏!"
+    permission: "bukkit.command.reload"
+  autoStart:
+    description: "是否自动开始游戏"
+    permission: "bukkit.command.reload"

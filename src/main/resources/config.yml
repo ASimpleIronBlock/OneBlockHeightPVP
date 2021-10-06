@@ -1,0 +1,11 @@
+OverWorldGenerationConfigFile: /OneBlockHeight/OverWorldGeneration.properties
+NetherGenerationConfigFile: /OneBlockHeight/NetherGeneration.properties
+TheEndGenerationConfigFile: /OneBlockHeight/TheEndGeneration.properties
+AutoStartGamePlayers: 5
+DeathModeTimer: 600
+DeathModeMapWidth: 20
+DeathModeMapHeight: 20
+RejoinTimer: 200
+GameStartTime: 600
+ScoreboardChangeTime: 100
+PreventLivingPlayerReceivingDeadPlayerMessage: true
