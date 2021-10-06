@@ -1,6 +1,7 @@
 package me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration
 
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.World
 
 object NetherMapGenerator:MapGenerator() {
