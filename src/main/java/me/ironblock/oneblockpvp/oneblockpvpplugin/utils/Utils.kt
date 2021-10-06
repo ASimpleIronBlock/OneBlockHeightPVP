@@ -5,7 +5,6 @@ import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.NetherMapGenerat
 import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.OverWorldMapGenerator
 import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.TheEndMapGenerator
 import org.bukkit.World
-import org.bukkit.entity.Player
 
 object Utils {
 
