@@ -3,6 +3,7 @@ package me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration
 import com.google.common.collect.Maps
 import me.ironblock.oneblockpvp.oneblockpvpplugin.OneBlockPvPPlugin
 import me.ironblock.oneblockpvp.oneblockpvpplugin.utils.RandomLocation
+import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.World
@@ -83,7 +84,7 @@ abstract class MapGenerator {
         worldIn.getBlockAt(width / 2 + 1, y+1, height / 2 + 1).type = Material.AIR
         worldIn.getBlockAt(width / 2, y+1, height / 2 - 1).type = Material.AIR
         worldIn.getBlockAt(width / 2, y+1, height / 2 + 1).type = Material.AIR
-
+        Bukkit.broadcastMessage("附魔台的坐标是:${width / 2},$y, ${height / 2}")
     }
 
     private fun generateBarrier(worldIn: World, width: Int, height: Int) {
@@ -156,6 +157,7 @@ abstract class MapGenerator {
                 }
             }
         }
+
     }
 
 
