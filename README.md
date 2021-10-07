@@ -52,6 +52,7 @@
 + TheEndGlobalDamageMultiplier: 末地全局伤害乘数
 + TheEndEnvironmentalDamageMultiplier: 末地环境伤害乘数
 + TheEndPlayerDamageMultiplier: 末地玩家伤害乘数
++ SpawnPoint: 出生点的坐标
 
 #### 地图的方块生成概率配置的写法:
 
