@@ -1,13 +1,9 @@
 package me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration
 
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.World
 
 object NetherMapGenerator:MapGenerator() {
-    override fun generateMap(worldIn: World, width: Int, height: Int) {
-        super.generateMap(worldIn, width, height, generatedBlocks)
-    }
 
 
 

@@ -4,9 +4,6 @@ import org.bukkit.Bukkit
 import org.bukkit.World
 
 object OverWorldMapGenerator : MapGenerator() {
-    override fun generateMap(worldIn: World, width: Int, height: Int) {
-        super.generateMap(worldIn, width, height, generatedBlocks)
-    }
 
 
     override fun getWorld(): World {

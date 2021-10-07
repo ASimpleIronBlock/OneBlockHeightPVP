@@ -22,9 +22,11 @@ abstract class MapGenerator {
     var width = 0
     var height = 0
 
-    protected var generatedBlocks: MutableMap<Material, Double> = Maps.newHashMap()
-    abstract fun generateMap(worldIn: World, width: Int, height: Int)
-    protected fun generateMap(worldIn: World, width: Int, height: Int, generatedBlocks: Map<Material, Double>) {
+    private var generatedBlocks: MutableMap<Material, Double> = Maps.newHashMap()
+    fun generateMap(worldIn: World, width: Int, height: Int){
+        generateMap(worldIn, width, height, generatedBlocks)
+    }
+    private fun generateMap(worldIn: World, width: Int, height: Int, generatedBlocks: Map<Material, Double>) {
         this.width = width
         this.height = height
         replaceWithAir(worldIn, width, height)
@@ -84,6 +86,7 @@ abstract class MapGenerator {
         worldIn.getBlockAt(width / 2 + 1, y+1, height / 2 + 1).type = Material.AIR
         worldIn.getBlockAt(width / 2, y+1, height / 2 - 1).type = Material.AIR
         worldIn.getBlockAt(width / 2, y+1, height / 2 + 1).type = Material.AIR
+
         Bukkit.broadcastMessage("附魔台的坐标是:${width / 2},$y, ${height / 2}")
     }
 
