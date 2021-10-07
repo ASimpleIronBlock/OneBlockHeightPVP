@@ -23,7 +23,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.player.*
-import org.bukkit.event.world.WorldLoadEvent
 import org.bukkit.inventory.InventoryView
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
@@ -72,6 +71,8 @@ object EventListener : Listener {
 
     //死斗模式的场地宽
     var deathModeHeight = 0
+
+    var spawnPoint = Location(OverWorldMapGenerator.getWorld(),100.0 ,241.0,100.0)
     /*
      * 游戏的一些状态
      */
@@ -125,7 +126,7 @@ object EventListener : Listener {
             }
 
             //传送
-            val location = Location(OverWorldMapGenerator.getWorld(), 100.0, 241.0, 100.0)
+            val location = spawnPoint
             event.player.teleport(location)
             event.player.removePotionEffect(PotionEffectType.GLOWING)
             object : BukkitRunnable() {
@@ -146,9 +147,11 @@ object EventListener : Listener {
 
     @EventHandler
     fun onPlayerQuit(event: PlayerQuitEvent) {
-        if (!deadPlayers.contains(event.player)) {
-            quitPlayers[event.player.uniqueId] = Timer(rejoinTime)
-            Bukkit.broadcastMessage("${event.player.name}掉线了,他有10秒钟的时间重新加入游戏")
+        if (isGameStarted) {
+            if (!deadPlayers.contains(event.player)) {
+                quitPlayers[event.player.uniqueId] = Timer(rejoinTime)
+                Bukkit.broadcastMessage("${event.player.name}掉线了,他有${rejoinTime/20}秒钟的时间重新加入游戏")
+            }
         }
     }
 
@@ -240,7 +243,7 @@ object EventListener : Listener {
             event.entity.gameMode = GameMode.SPECTATOR
             deadPlayers.add(event.entity)
         }
-        event.entity.setBedSpawnLocation(Location(OverWorldMapGenerator.getWorld(), 100.0, 241.0, 100.0), true)
+        event.entity.setBedSpawnLocation(spawnPoint, true)
     }
 
     @EventHandler
@@ -410,7 +413,7 @@ object EventListener : Listener {
                         val f1: Double = b.setScale(2, BigDecimal.ROUND_HALF_UP).toDouble()
                         onlinePlayer.spigot().sendMessage(
                             ChatMessageType.ACTION_BAR,
-                            net.md_5.bungee.api.chat.TextComponent(ChatColor.GREEN.toString() + "距离你${f1}的地方有敌人")
+                            net.md_5.bungee.api.chat.TextComponent(ChatColor.GREEN.toString() + "距离你${f1}格的地方有敌人")
                         )
                     }
                 }
@@ -520,7 +523,7 @@ object EventListener : Listener {
         deathMode = false
         deathModeTimer = null
         gameStartTimer = null
-        val location = Location(OverWorldMapGenerator.getWorld(), 100.0, 241.0, 100.0)
+        val location = spawnPoint
         for (onlinePlayer in Bukkit.getOnlinePlayers()) {
             onlinePlayer.teleport(location)
             onlinePlayer.gameMode = GameMode.SPECTATOR
@@ -571,14 +574,11 @@ object EventListener : Listener {
     }
 
 
-    @EventHandler
-    fun onWorldLoaded(event:WorldLoadEvent){
-        scoreboardInit()
-    }
+
     /**
      * 对计分板进行初始化
      */
-    private fun scoreboardInit(){
+    fun scoreboardInit(){
         Bukkit.getScoreboardManager()!!.mainScoreboard.getObjective("fish")?:Bukkit.getScoreboardManager()!!.mainScoreboard.registerNewObjective("fish","trigger","钓鱼榜")
         Bukkit.getScoreboardManager()!!.mainScoreboard.getTeam("died")?: run {
             Bukkit.getScoreboardManager()!!.mainScoreboard.registerNewTeam("died")

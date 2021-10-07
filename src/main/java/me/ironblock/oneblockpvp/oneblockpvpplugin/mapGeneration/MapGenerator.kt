@@ -76,16 +76,32 @@ abstract class MapGenerator {
     }
 
     private fun genEnchantTable(worldIn: World, width: Int, height: Int) {
+        //放附魔台
         worldIn.getBlockAt(width / 2, y, height / 2).type = Material.ENCHANTING_TABLE
-        worldIn.getBlockAt(width / 2, y+1, height / 2).type = Material.AIR
-        worldIn.getBlockAt(width / 2 - 1, y+1, height / 2 - 1).type = Material.AIR
-        worldIn.getBlockAt(width / 2 - 1, y+1, height / 2).type = Material.AIR
-        worldIn.getBlockAt(width / 2 - 1, y+1, height / 2 + 1).type = Material.AIR
-        worldIn.getBlockAt(width / 2 + 1, y+1, height / 2 - 1).type = Material.AIR
-        worldIn.getBlockAt(width / 2 + 1, y+1, height / 2).type = Material.AIR
-        worldIn.getBlockAt(width / 2 + 1, y+1, height / 2 + 1).type = Material.AIR
-        worldIn.getBlockAt(width / 2, y+1, height / 2 - 1).type = Material.AIR
-        worldIn.getBlockAt(width / 2, y+1, height / 2 + 1).type = Material.AIR
+        //在附魔台下面放个萤石
+        worldIn.getBlockAt(width / 2, y-1, height / 2).type = Material.GLOWSTONE
+
+        //填充方块
+        for (i in -1..1){
+            for (j in -1..1){
+                worldIn.getBlockAt(width / 2+i, y+1, height / 2+j).type = Material.AIR
+            }
+        }
+
+
+
+        //清理流体
+        for (i in -4..4){
+            for (j in -4..4){
+                worldIn.getBlockAt(width/2+i,y+1,height/2+j).let {
+                    if (it.isLiquid)it.type=Material.AIR
+                }
+            }
+        }
+
+
+
+
 
         Bukkit.broadcastMessage("附魔台的坐标是:${width / 2},$y, ${height / 2}")
     }

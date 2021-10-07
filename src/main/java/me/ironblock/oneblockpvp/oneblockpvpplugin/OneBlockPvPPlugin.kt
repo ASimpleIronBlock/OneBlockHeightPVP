@@ -9,6 +9,7 @@ import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.NetherMapGenerat
 import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.OverWorldMapGenerator
 import me.ironblock.oneblockpvp.oneblockpvpplugin.mapGeneration.TheEndMapGenerator
 import me.ironblock.oneblockpvp.oneblockpvpplugin.utils.DropUtils
+import org.bukkit.Location
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
@@ -70,6 +71,7 @@ class OneBlockPvPPlugin : JavaPlugin() {
         config.addDefault("TheEndEnvironmentalDamageMultiplier", 1.5)
         config.addDefault("TheEndPlayerDamageMultiplier", 1.5)
         config.addDefault("PreventLivingPlayerReceivingDeadPlayerMessage", true)
+        config.addDefault("SpawnPoint", "100 241 100")
 
         config.options().copyDefaults(true)
         saveConfig()
@@ -99,7 +101,16 @@ class OneBlockPvPPlugin : JavaPlugin() {
         EventListener.gameAutoStartPlayers = config["AutoStartGamePlayers"].toString().toInt()
         EventListener.deathModeWidth = config["DeathModeMapWidth"].toString().toInt()
         EventListener.deathModeHeight = config["DeathModeMapHeight"].toString().toInt()
+        val string = config["SpawnPoint"].toString().split(" ")
+        if (string.size==3){
+            EventListener.spawnPoint = Location(OverWorldMapGenerator.getWorld(),string[0].toDouble(),string[1].toDouble(),string[2].toDouble())
+        }else{
+            logger.warning("SpawnPoint配置的格式不正确")
+        }
 
+
+        EventListener.init()
+        EventListener.scoreboardInit()
     }
 
     private fun checkAndCopy(configRoot:String,copyPath:String):Properties{

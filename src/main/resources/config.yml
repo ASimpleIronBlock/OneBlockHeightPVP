@@ -9,3 +9,4 @@ RejoinTimer: 200
 GameStartTime: 600
 ScoreboardChangeTime: 100
 PreventLivingPlayerReceivingDeadPlayerMessage: true
+SpawnPoint: 100 241 100

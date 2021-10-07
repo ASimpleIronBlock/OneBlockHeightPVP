@@ -46,7 +46,7 @@ object CommandStart : CommandExecutor {
         for (entry in Bukkit.getScoreboardManager()!!.mainScoreboard.getTeam("died")!!.entries) {
             Bukkit.getScoreboardManager()!!.mainScoreboard.getTeam("died")!!.removeEntry(entry)
         }
-        NetherMapGenerator.spreadPlayers(Bukkit.getOnlinePlayers(), bl)
+        OverWorldMapGenerator.spreadPlayers(Bukkit.getOnlinePlayers(), bl)
         val end = System.currentTimeMillis()
         EventListener.resetPlayerDeadStats()
         for (world in Bukkit.getWorlds()) {
